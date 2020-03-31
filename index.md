@@ -171,11 +171,11 @@ With this more averaged out data, our averaged speed over time graph looks somet
 
 By combining the two previous graphs together, we are able to see the ball being tracked over time with the speed and location of the ball.
 
-![Ball Location with Averaged Speed](img/ball_xy_alt.jpg)
+![Ball Location with Averaged Speed](img/spike_1-plotly.gif)
 
 From the velocity graph, we can now see where every hit is located. Whenever there is a local minimum, we can confidently say someone hit the ball. Based off this next figure we can see that there were indeed 7 hits within this match.
 
-![Averaged Speed Graph over Time with Hit Markers](img/spike_1-plotly.gif)
+![Averaged Speed Graph over Time with Hit Markers](img/mph_avg_frame_alt.jpg)
 
 ## Recommendations
 
