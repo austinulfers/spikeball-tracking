@@ -20,7 +20,7 @@ The portion of the video that will be used is as follows.
 
 >0:02-0:11
 
-[![spike_1.mp4](0.jpg)](https://youtu.be/UXPjH3uk0Bs?t=2)
+[![spike_1.mp4](img/0.jpg)](https://youtu.be/UXPjH3uk0Bs?t=2)
 
 The main reason why this project interested me so much was because of the nature of the spikeball scene. Although the game of roundnet was invented in the late 1980s by Jeff Knurek, the Spikeball company has allowed it to grow in immense popularity within the past several decades. Articles in ESPN have shed light on just how popular the sport has become. With over 4 million players world wide, there is no doubt that spikeball is here to stay.
 
@@ -49,7 +49,7 @@ Since we are working with a video for this project, the important first step is 
 
 It is also important to note that while these diagram only pertains to one image, by reading through a video, frame by frame, we are able to perform this exact same analysis repititavely.
 
-![Frame 72](spike_1_img.png)
+![Frame 72](img/spike_1_img.png)
 
 It is important to not make this image greyscale on import. Since most of our tracking is based off the color of the ball, we need the values associated with each pixel.
 
@@ -57,7 +57,7 @@ It is important to not make this image greyscale on import. Since most of our tr
 
 After we have loaded the currently frame, our next task is to establish a threshold within the image. While this can be performed in many different ways, resources online encouraged shifting the color format to *HSV* instead of the imported version of *BGR*. This allows for an easier range of values to be established in comparison to BGR. This was done using OpenCV's `cv2.cvtColor(img, cv2.COLOR_BGR2HSV)` command. This converted the colorscape of the image to be better processed in the next part of thresholding. Below is the image representation of the HSV landscaped version of the above image.
 
-![HSV Image](spike_1_hsv.jpg)
+![HSV Image](img/spike_1_hsv.jpg)
 
 Now that the image is converted to HSV format, now we just need to threshold. This would be performed using OpenCV's `cv2.inRange()` function. Using this function you are able to pass in a range of HSV values in order to threshold the image based off that range of colors. Although the specific colors within videos and images can range camera and lighting scenario, for the above photo, I found that the following ranges worked best for isolating the ball and net from the rest of the noise within the image. I would anticipate that slight adjustments to the lower and upper bounds would be encouraged/nesessary in order to improve performace and accuracy on later videos.
 
@@ -69,7 +69,7 @@ upper = np.array([35, 255, 255])
 
 Now that the upper and lower color bounds have been specified, it is now time to perform the threshold using the command `cv2.inRange(hsv, lower, upper)`. Altough perhaps a bit on the cautious side, I like to utilize OpenCV's `cs2.dialte()` and `cv2.erode()` functions in order to remove some potential noise from the thresholded image. Once this is all done, we should get a masked image like this.
 
-![Masked Image](spike_1-frames/frame72.jpg)
+![Masked Image](img/frame72.jpg)
 
 ### 3. Locating the Contours
 
@@ -125,7 +125,7 @@ Since the main topic for this research was tracking the ball, lets start with th
 
 The `invert_yaxis()` function worked for me to do just this.
 
-![Ball Location](ball_xy.jpg)
+![Ball Location](img/ball_xy.jpg)
 
 The other metric that I focused on for this research was the ball's velocity. I thought it could be an interesting metric to track as most sports have the speed of the ball as something that is relevant. Since we have the pixel position of both the center of the ball as well as the net, we can use the spikeball net as a refernce how how far the ball is traveling.
 
@@ -148,7 +148,7 @@ $$v_i^{mph} = \frac{\Delta{x}_{i}^{mi}}{t_i^{h}}$$
 
 Here is the graph when we plot this velocity by frame of the video.
 
-![Speed Graph over Time](mph_frame.jpg)
+![Speed Graph over Time](img/mph_frame.jpg)
 
 From this graph we are able to learn a little bit about what's going on. However, before we can get there, we can see some issues within the graph. The main issue is that for some frames we have a velocity of 0. This creates a graph where we see spikes of velocity and other times no movement.
 
@@ -164,18 +164,18 @@ $$\bar{v}^{mph} = \frac{\sum_i^{n}{v_{i-n}^{mph}}}{n}$$
 
 With this more averaged out data, our averaged speed over time graph looks something a little like this.
 
-![Averaged Speed Graph over Time](mph_avg_frame.jpg)
+![Averaged Speed Graph over Time](img/mph_avg_frame.jpg)
 
 
 ## Results
 
 By combining the two previous graphs together, we are able to see the ball being tracked over time with the speed and location of the ball.
 
-![Ball Location with Averaged Speed](ball_xy_alt.jpg)
+![Ball Location with Averaged Speed](img/ball_xy_alt.jpg)
 
 From the velocity graph, we can now see where every hit is located. Whenever there is a local minimum, we can confidently say someone hit the ball. Based off this next figure we can see that there were indeed 7 hits within this match.
 
-![Averaged Speed Graph over Time with Hit Markers](mph_avg_frame_alt.jpg)
+![Averaged Speed Graph over Time with Hit Markers](img/spike_1-plotly.gif)
 
 ## Recommendations
 
