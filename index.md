@@ -6,7 +6,7 @@ Created: March 31st, 2020
 
 ## Abstract
 
-This paper acts as a proof of concept to track a spikeball within a video and recreate its path in real time. The procedures and methods implemented here are best implemented when the camera is directly above the net (i.e. a drone) and moves as little as possible. Future iterations of this project will adapt to wider scenarios however, at the moments, elementary information like ball hits/ball location/ball velocity within the game of roundnet/spikeball act as a proving ground for later developments.
+This paper acts as a proof of concept to track a spikeball within a video and recreate its path in real time. The procedures and methods implemented here are best implemented when the camera is directly above the net (i.e. a drone) and moves as little as possible. Future iterations of this project will adapt to wider scenarios however, at the moment, elementary information like ball hits/ball location/ball velocity within the game of roundnet/spikeball act as a proving ground for later developments.
 
 ## Outline
 
@@ -24,7 +24,7 @@ The portion of the video that will be used is as follows.
 
 The main reason why this project interested me so much was because of the nature of the spikeball scene. Although the game of roundnet was invented in the late 1980s by Jeff Knurek, the Spikeball company has allowed it to grow in immense popularity within the past several decades. Articles in ESPN have shed light on just how popular the sport has become. With over 4 million players world wide, there is no doubt that spikeball is here to stay.
 
-One key element that many professional sports have is that they have a lot of game statistics. Since Spikeball is pretty new to this scene of professional sports, it makes sense why they have yet to implement anything of this sort. However, after being bored and stuck inside from quarantine from the COVID-19 outbreak, my mind got to thinking and I started brainstorming ways that I could start tracking some of these sports metrics.
+One key element that many professional sports have is that they have a lot of game statistics. Since Spikeball is pretty new to this scene of professional sports, it makes sense why they have yet to implement anything of this sort. However, after my mind got to thinking, I started brainstorming ways that I could utilize my data science skills and start tracking some of these sports metrics.
 
 I knew tracking metrics like speed of a serve and hit count in a match were things that were easily attainable so I thought I would set out with those in mind. Below, I will demonstrate how I have implemented various machine learning techniques to attain these goals.
 
@@ -154,7 +154,7 @@ From this graph we are able to learn a little bit about what's going on. However
 
 One way we are able to get past this is to average this velocity over several frames to get the speed the ball is traveling. After looking back at some of the frames within the video, it is clear that the ball doesn't change position within some of the frames. While I'm not exactly sure why this is happening, it appears to be a pretty consistent occurance which suggests to me that the original video is something like 24 or 25 frames per second and when I downloaded it, it defaulted it to 30 and filled the empty frames with duplicates from prior frames.
 
-To solve this issue, there are two potential course of actions. We can remove the empty frames and act as if the video occured in the adjested frame rates, or we can average the still frames from the frame before and the frame after and use that as the ball's data within that frame. While there are pros and cons to both of these techniques, it is suggested that you just redownload the video in the original frame rate and repreform the calculations.
+To solve this issue, there are two potential course of actions. We can remove the empty frames and act as if the video occured in the adjusted frame rates, or we can average the still frames from the frame before and the frame after and use that as the ball's data within that frame. While there are pros and cons to both of these techniques, it is suggested that you just redownload the video in the original frame rate and repreform the calculations.
 
 Since I don't have the option to redownload in a different frame rate, I am going to chose the option of averaging the still frames from the one before and after. While not perfect, it does a good enough job while still retaining the true time associated to each frame of the video.
 
@@ -179,7 +179,7 @@ From the velocity graph, we can now see where every hit is located. Whenever the
 
 ## Recommendations
 
-Since this is mainly just a proof of concept, there are both a ton of recommendations and limitations with this pipeline that has been created this far. I will start with the improvements that will discuss the limitations following.
+Since this is mainly just a proof of concept, there are both a ton of recommendations and limitations with this pipeline that have been created this far. I will start with the improvements that will discuss the limitations following.
 
 With some more analysis and work:
 
